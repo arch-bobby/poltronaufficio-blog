@@ -2,6 +2,9 @@ import * as cookie from "cookie";
 import { Session } from "@contracts/constants";
 import { getSessionCookieOptions } from "./lib/cookies";
 import { createRouter, authedQuery } from "./middleware";
+import { getDb } from "./queries/connection";
+import { users } from "@db/schema";
+import { eq } from "drizzle-orm";
 
 export const authRouter = createRouter({
   me: authedQuery.query((opts) => opts.ctx.user),
@@ -18,5 +21,13 @@ export const authRouter = createRouter({
       }),
     );
     return { success: true };
+  }),
+  becomeAdmin: authedQuery.mutation(async ({ ctx }) => {
+    const db = getDb();
+    await db
+      .update(users)
+      .set({ role: "admin" })
+      .where(eq(users.id, ctx.user.id));
+    return { success: true, role: "admin" };
   }),
 });
