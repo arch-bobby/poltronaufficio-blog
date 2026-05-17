@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Search, Menu, X } from 'lucide-react';
+import { Link } from 'react-router';
+import { useAuth } from '@/hooks/useAuth';
+import { Search, Menu, X, Settings } from 'lucide-react';
 
 const navLinks = [
   { label: 'BLOG', href: '#blog', active: true },
@@ -11,6 +13,7 @@ const navLinks = [
 
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user } = useAuth();
 
   return (
     <nav
@@ -70,6 +73,15 @@ export default function Navigation() {
           >
             <Search size={20} />
           </button>
+          {user?.role === 'admin' && (
+            <Link
+              to="/admin"
+              className="flex items-center gap-1 font-heading font-medium text-sm transition-colors duration-300 hover:text-[#0099CC]"
+              style={{ color: '#000000' }}
+            >
+              <Settings size={16} /> Admin
+            </Link>
+          )}
           <a
             href="#newsletter"
             className="font-heading font-semibold text-xs tracking-[0.08em] uppercase px-5 py-2 border transition-all duration-300 hover:bg-[#0099CC] hover:text-white"
