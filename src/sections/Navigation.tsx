@@ -85,7 +85,7 @@ export default function Navigation() {
           {user ? (
             <Link
               to="/login"
-              className="flex items-center gap-1 font-heading font-medium text-sm transition-colors duration-300 hover:text-[#EF4444]"
+              className="flex items-center gap-1 font-heading font-medium text-sm px-3 py-1.5 rounded transition-colors duration-300 hover:bg-red-50"
               style={{ color: '#000000' }}
             >
               <LogOut size={16} /> Esci
@@ -93,10 +93,10 @@ export default function Navigation() {
           ) : (
             <Link
               to="/login"
-              className="flex items-center gap-1 font-heading font-medium text-sm transition-colors duration-300 hover:text-[#0099CC]"
-              style={{ color: '#000000' }}
+              className="flex items-center gap-1 font-heading font-semibold text-xs tracking-[0.08em] uppercase px-4 py-2 rounded transition-all duration-300 hover:bg-[#007AA3]"
+              style={{ backgroundColor: '#0099CC', color: '#FFFFFF' }}
             >
-              <LogIn size={16} /> Login
+              <LogIn size={14} /> Login
             </Link>
           )}
           <a
