@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { useAuth } from '@/hooks/useAuth';
-import { Search, Menu, X, Settings } from 'lucide-react';
+import { Search, Menu, X, Settings, LogIn, LogOut } from 'lucide-react';
 
 const navLinks = [
   { label: 'BLOG', href: '#blog', active: true },
@@ -82,6 +82,23 @@ export default function Navigation() {
               <Settings size={16} /> Admin
             </Link>
           )}
+          {user ? (
+            <Link
+              to="/login"
+              className="flex items-center gap-1 font-heading font-medium text-sm transition-colors duration-300 hover:text-[#EF4444]"
+              style={{ color: '#000000' }}
+            >
+              <LogOut size={16} /> Esci
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="flex items-center gap-1 font-heading font-medium text-sm transition-colors duration-300 hover:text-[#0099CC]"
+              style={{ color: '#000000' }}
+            >
+              <LogIn size={16} /> Login
+            </Link>
+          )}
           <a
             href="#newsletter"
             className="font-heading font-semibold text-xs tracking-[0.08em] uppercase px-5 py-2 border transition-all duration-300 hover:bg-[#0099CC] hover:text-white"
@@ -125,6 +142,13 @@ export default function Navigation() {
               {link.label}
             </a>
           ))}
+          <Link
+            to={user ? "/login" : "/login"}
+            className="font-heading font-medium text-sm tracking-[0.02em] text-black hover:text-[#0099CC] transition-colors duration-300 py-2 flex items-center gap-2"
+            onClick={() => setMobileOpen(false)}
+          >
+            {user ? <><LogOut size={16} /> Esci</> : <><LogIn size={16} /> Login</>}
+          </Link>
           <a
             href="#newsletter"
             className="font-heading font-semibold text-xs tracking-[0.08em] uppercase px-5 py-2 border text-center transition-all duration-300 hover:bg-[#0099CC] hover:text-white mt-2"
