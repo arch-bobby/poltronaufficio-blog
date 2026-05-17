@@ -1,20 +1,25 @@
-import { useState } from 'react'
-import '../App.css'
+import AsciiTunnel from '../sections/AsciiTunnel';
+import Navigation from '../sections/Navigation';
+import HeroSection from '../sections/HeroSection';
+import FeaturedArticles from '../sections/FeaturedArticles';
+import ProductSpotlight from '../sections/ProductSpotlight';
+import LatestNews from '../sections/LatestNews';
+import Newsletter from '../sections/Newsletter';
+import Footer from '../sections/Footer';
 
 export default function Home() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <AsciiTunnel />
+      <div className="relative" style={{ zIndex: 1 }}>
+        <Navigation />
+        <HeroSection />
+        <FeaturedArticles />
+        <ProductSpotlight />
+        <LatestNews />
+        <Newsletter />
+        <Footer />
       </div>
     </>
-  )
+  );
 }
