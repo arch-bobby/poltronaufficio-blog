@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { useAuth } from '@/hooks/useAuth';
-import { Search, Menu, X, Settings, LogIn, LogOut } from 'lucide-react';
+import { Search, Menu, X, LogIn } from 'lucide-react';
 
 const navLinks = [
   { label: 'BLOG', href: '#blog', active: true },
@@ -13,7 +12,6 @@ const navLinks = [
 
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { user } = useAuth();
 
   return (
     <nav
@@ -73,32 +71,13 @@ export default function Navigation() {
           >
             <Search size={20} />
           </button>
-          {user?.role === 'admin' && (
-            <Link
-              to="/admin"
-              className="flex items-center gap-1 font-heading font-medium text-sm transition-colors duration-300 hover:text-[#0099CC]"
-              style={{ color: '#000000' }}
-            >
-              <Settings size={16} /> Admin
-            </Link>
-          )}
-          {user ? (
-            <Link
-              to="/login"
-              className="flex items-center gap-1 font-heading font-medium text-sm px-3 py-1.5 rounded transition-colors duration-300 hover:bg-red-50"
-              style={{ color: '#000000' }}
-            >
-              <LogOut size={16} /> Esci
-            </Link>
-          ) : (
-            <Link
-              to="/login"
-              className="flex items-center gap-1 font-heading font-semibold text-xs tracking-[0.08em] uppercase px-4 py-2 rounded transition-all duration-300 hover:bg-[#007AA3]"
-              style={{ backgroundColor: '#0099CC', color: '#FFFFFF' }}
-            >
-              <LogIn size={14} /> Login
-            </Link>
-          )}
+          <Link
+            to="/login"
+            className="flex items-center gap-1 font-heading font-semibold text-xs tracking-[0.08em] uppercase px-5 py-2 rounded transition-all duration-300 hover:bg-[#007AA3]"
+            style={{ backgroundColor: '#0099CC', color: '#FFFFFF' }}
+          >
+            <LogIn size={14} /> Accedi
+          </Link>
           <a
             href="#newsletter"
             className="font-heading font-semibold text-xs tracking-[0.08em] uppercase px-5 py-2 border transition-all duration-300 hover:bg-[#0099CC] hover:text-white"
@@ -143,11 +122,12 @@ export default function Navigation() {
             </a>
           ))}
           <Link
-            to={user ? "/login" : "/login"}
-            className="font-heading font-medium text-sm tracking-[0.02em] text-black hover:text-[#0099CC] transition-colors duration-300 py-2 flex items-center gap-2"
+            to="/login"
+            className="font-heading font-semibold text-sm text-center px-5 py-3 rounded transition-all duration-300 hover:bg-[#007AA3]"
+            style={{ backgroundColor: '#0099CC', color: '#FFFFFF' }}
             onClick={() => setMobileOpen(false)}
           >
-            {user ? <><LogOut size={16} /> Esci</> : <><LogIn size={16} /> Login</>}
+            Accedi
           </Link>
           <a
             href="#newsletter"
