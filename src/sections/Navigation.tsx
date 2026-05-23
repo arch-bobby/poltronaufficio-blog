@@ -1,17 +1,52 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
-import { Search, Menu, X, LogIn } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router';
+import { Search, Menu, X } from 'lucide-react';
 
-const navLinks = [
-  { label: 'BLOG', href: '#blog', active: true },
-  { label: 'NOVIT\u00C0', href: '#novita' },
-  { label: 'PRODOTTI', href: '#prodotti' },
-  { label: 'GUIDE', href: '#guide' },
-  { label: 'CHI SIAMO', href: '#chisiamo' },
+interface NavLink {
+  label: string;
+  target: string;
+  active?: boolean;
+  isRoute?: boolean;
+}
+
+const navLinks: NavLink[] = [
+  { label: 'BLOG', target: '/', active: true },
+  { label: "NOVITA'", target: '/novita', isRoute: true },
+  { label: 'PRODOTTI', target: '/prodotti', isRoute: true },
+  { label: 'GUIDE', target: '/guide', isRoute: true },
+  { label: 'DESIGN', target: '/design', isRoute: true },
+  { label: 'CATALOGHI', target: '/libri', isRoute: true },
+  { label: 'CHI SIAMO', target: 'chisiamo' },
 ];
+
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
 
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === '/';
+
+  function handleNavClick(link: NavLink) {
+    setMobileOpen(false);
+    if (link.isRoute || link.target === '/') {
+      // Route link - let Link handle it
+      return;
+    }
+    // Internal section link
+    if (isHome) {
+      scrollToSection(link.target);
+    } else {
+      // Navigate to home with hash, then scroll
+      navigate('/#' + link.target);
+      setTimeout(() => scrollToSection(link.target), 300);
+    }
+  }
 
   return (
     <nav
@@ -26,69 +61,79 @@ export default function Navigation() {
     >
       <div className="max-w-[1400px] mx-auto h-full flex items-center justify-between px-6">
         {/* Logo */}
-        <a href="#" className="shrink-0 flex items-center">
+        <Link to="/" className="shrink-0 flex items-center">
           <img
-            src="/logo.jpg"
+            src="./logo.jpg"
             alt="Poltrona Ufficio"
             className="h-9 w-auto object-contain"
           />
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="group relative font-heading font-medium text-sm tracking-[0.02em] transition-colors duration-300"
-              style={{
-                color: link.active ? '#0099CC' : '#000000',
-              }}
-              onMouseEnter={(e) => {
-                if (!link.active) (e.target as HTMLElement).style.color = '#0099CC';
-              }}
-              onMouseLeave={(e) => {
-                if (!link.active) (e.target as HTMLElement).style.color = '#000000';
-              }}
-            >
-              {link.label}
-              <span
-                className="absolute -bottom-1 left-0 h-[2px] w-full origin-left transition-transform duration-300 ease-out"
-                style={{
-                  backgroundColor: '#0099CC',
-                  transform: link.active ? 'scaleX(1)' : 'scaleX(0)',
-                }}
-              />
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.isRoute || link.target === '/' ? (
+              <Link
+                key={link.label}
+                to={link.target}
+                className="group relative font-heading font-medium text-sm tracking-[0.02em] transition-colors duration-300"
+                style={{ color: link.active && isHome ? '#0099CC' : '#000000' }}
+                onMouseEnter={(e) => { (e.target as HTMLElement).style.color = '#0099CC'; }}
+                onMouseLeave={(e) => { (e.target as HTMLElement).style.color = link.active && isHome ? '#0099CC' : '#000000'; }}
+              >
+                {link.label}
+                <span
+                  className="absolute -bottom-1 left-0 h-[2px] w-full origin-left transition-transform duration-300 ease-out"
+                  style={{
+                    backgroundColor: '#0099CC',
+                    transform: (link.active && isHome) || (!isHome && location.pathname === link.target) ? 'scaleX(1)' : 'scaleX(0)',
+                  }}
+                />
+              </Link>
+            ) : (
+              <button
+                key={link.label}
+                onClick={() => handleNavClick(link)}
+                className="group relative font-heading font-medium text-sm tracking-[0.02em] transition-colors duration-300 cursor-pointer bg-transparent border-none"
+                style={{ color: '#000000' }}
+                onMouseEnter={(e) => { (e.target as HTMLElement).style.color = '#0099CC'; }}
+                onMouseLeave={(e) => { (e.target as HTMLElement).style.color = '#000000'; }}
+              >
+                {link.label}
+                <span
+                  className="absolute -bottom-1 left-0 h-[2px] w-full origin-left transition-transform duration-300 ease-out"
+                  style={{ backgroundColor: '#0099CC', transform: 'scaleX(0)' }}
+                />
+              </button>
+            )
+          )}
         </div>
 
         {/* Desktop Right */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
           <button
             className="text-black hover:text-[#0099CC] transition-colors duration-300"
             aria-label="Cerca"
           >
             <Search size={20} />
           </button>
+
           <Link
-            to="/login"
-            className="flex items-center gap-1 font-heading font-semibold text-xs tracking-[0.08em] uppercase px-5 py-2 rounded transition-all duration-300 hover:bg-[#007AA3]"
-            style={{ backgroundColor: '#0099CC', color: '#FFFFFF' }}
-          >
-            <LogIn size={14} /> Accedi
-          </Link>
-          <a
-            href="#newsletter"
-            className="font-heading font-semibold text-xs tracking-[0.08em] uppercase px-5 py-2 border transition-all duration-300 hover:bg-[#0099CC] hover:text-white"
+            to="/"
+            onClick={(e) => {
+              if (!isHome) return;
+              e.preventDefault();
+              scrollToSection('newsletter');
+            }}
+            className="font-heading font-bold text-xs tracking-[0.08em] uppercase px-5 py-2.5 rounded transition-all duration-300 hover:bg-[#007AA3]"
             style={{
-              borderColor: '#0099CC',
-              color: '#0099CC',
+              backgroundColor: '#0099CC',
+              color: '#FFFFFF',
               borderRadius: '4px',
             }}
           >
             ISCRIVITI
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -111,36 +156,40 @@ export default function Navigation() {
             borderBottom: '1px solid #E5E5E5',
           }}
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="font-heading font-medium text-sm tracking-[0.02em] text-black hover:text-[#0099CC] transition-colors duration-300 py-2"
-              onClick={() => setMobileOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.isRoute || link.target === '/' ? (
+              <Link
+                key={link.label}
+                to={link.target}
+                className="font-heading font-medium text-sm tracking-[0.02em] text-black hover:text-[#0099CC] transition-colors duration-300 py-2 block"
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <button
+                key={link.label}
+                onClick={() => handleNavClick(link)}
+                className="font-heading font-medium text-sm tracking-[0.02em] text-black hover:text-[#0099CC] transition-colors duration-300 py-2 text-left bg-transparent border-none cursor-pointer"
+              >
+                {link.label}
+              </button>
+            )
+          )}
+
           <Link
-            to="/login"
-            className="font-heading font-semibold text-sm text-center px-5 py-3 rounded transition-all duration-300 hover:bg-[#007AA3]"
-            style={{ backgroundColor: '#0099CC', color: '#FFFFFF' }}
-            onClick={() => setMobileOpen(false)}
-          >
-            Accedi
-          </Link>
-          <a
-            href="#newsletter"
-            className="font-heading font-semibold text-xs tracking-[0.08em] uppercase px-5 py-2 border text-center transition-all duration-300 hover:bg-[#0099CC] hover:text-white mt-2"
-            style={{
-              borderColor: '#0099CC',
-              color: '#0099CC',
-              borderRadius: '4px',
+            to="/"
+            onClick={(e) => {
+              setMobileOpen(false);
+              if (!isHome) return;
+              e.preventDefault();
+              scrollToSection('newsletter');
             }}
-            onClick={() => setMobileOpen(false)}
+            className="font-heading font-bold text-sm text-center px-5 py-3 rounded transition-all duration-300 hover:bg-[#007AA3]"
+            style={{ backgroundColor: '#0099CC', color: '#FFFFFF' }}
           >
             ISCRIVITI
-          </a>
+          </Link>
         </div>
       )}
     </nav>

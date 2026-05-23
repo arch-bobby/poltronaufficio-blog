@@ -64,10 +64,10 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative min-h-[100dvh] flex flex-col justify-end"
-      style={{ zIndex: 1, padding: '0 0 8vh 8vw' }}
+      className="relative flex flex-col justify-start"
+      style={{ zIndex: 1, padding: '80px 6vw 3rem 6vw' }}
     >
-      <div className="max-w-[600px]">
+      <div className="w-full">
         <span
           ref={labelRef}
           className="inline-block font-heading font-semibold text-xs tracking-[0.08em] uppercase opacity-0 translate-y-3"
@@ -89,7 +89,7 @@ export default function HeroSection() {
 
         <p
           ref={bodyRef}
-          className="font-body text-lg leading-relaxed mt-6 max-w-[480px] opacity-0 translate-y-4"
+          className="font-body text-lg leading-relaxed mt-6 opacity-0 translate-y-4"
           style={{ color: 'rgba(0,0,0,0.7)' }}
         >
           Scopri guide, novit&agrave; e consigli per arredare il tuo ufficio con stile

@@ -1,108 +1,108 @@
-import { useEffect, useRef } from 'react';
+import { useMemo } from 'react';
 import { Link } from 'react-router';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+const novitaCard = {
+  slug: 'horo-direzionale-anteprima-2026',
+  image: './horo-1.jpg',
+  category: 'NOVIT\u00C0',
+  title: 'HORO: anteprima linea direzionale 2026',
+  date: '22 Maggio 2026',
+};
 
-const articles = [
+const designCards = [
   {
-    slug: 'come-scegliere-sedia-ergonomica',
-    image: '/featured-1.jpg',
-    category: 'ERGONOMIA',
-    title: 'Come scegliere la sedia ergonomica perfetta',
-    date: '15 Gennaio 2026',
-  },
-  {
-    slug: 'scrivanie-minimaliste-uffici',
-    image: '/featured-2.jpg',
+    slug: 'linea-sedute-star-operativa',
+    image: './star-hero.png',
     category: 'DESIGN',
-    title: 'Scrivanie minimaliste per uffici moderni',
-    date: '10 Gennaio 2026',
-  },
-  {
-    slug: 'arredare-coworking',
-    image: '/featured-3.jpg',
-    category: 'GUIDE',
-    title: 'Come arredare uno spazio di coworking',
-    date: '5 Gennaio 2026',
+    title: 'STAR operativa: un classico da 12 anni',
+    date: '22 Maggio 2026',
   },
 ];
 
+const productCards = [
+  {
+    slug: 'ke123n-key-line-poltrona-operativa',
+    image: './keyline-article-1.jpg',
+    category: 'PRODOTTI',
+    title: 'KE123N Key Line: design e tecnologia',
+    date: '22 Maggio 2026',
+  },
+  {
+    slug: 'poltrona-dattilo-ariston-aa08',
+    image: './ariston-1.jpg',
+    category: 'PRODOTTI',
+    title: 'AA08 Poltrona Ariston: il best seller',
+    date: '22 Maggio 2026',
+  },
+  {
+    slug: 'panca-gig-bk234-best-seller',
+    image: './panca-gig-1.jpg',
+    category: 'PRODOTTI',
+    title: 'BK234 Panca GIG: robustezza e durabilita',
+    date: '22 Maggio 2026',
+  },
+];
+
+function getRandomItem<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
 export default function FeaturedArticles() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<HTMLElement[]>([]);
+  const randomDesign = useMemo(() => getRandomItem(designCards), []);
+  const randomProduct = useMemo(() => getRandomItem(productCards), []);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(cardsRef.current, {
-        opacity: 0,
-        y: 30,
-        duration: 0.6,
-        ease: 'power2.out',
-        stagger: 0.12,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      });
-    });
-
-    return () => ctx.revert();
-  }, []);
+  // Card 1: NOVITÀ fixed, Card 2: DESIGN random, Card 3: PRODOTTI random
+  const allCards = [novitaCard, randomDesign, randomProduct];
 
   return (
     <section
-      ref={sectionRef}
       id="blog"
       className="relative"
       style={{
         zIndex: 2,
-        backgroundColor: '#FFFFFF',
-        padding: '5rem 4vw',
+        backgroundColor: '#F5F5F5',
+        padding: '1.5rem 4vw 1rem 4vw',
       }}
     >
       <div className="max-w-[1200px] mx-auto">
         <span
-          className="inline-block font-heading font-semibold text-xs tracking-[0.08em] uppercase mb-8"
+          className="inline-block font-heading font-semibold text-xs tracking-[0.08em] uppercase mb-3"
           style={{ color: '#0099CC' }}
         >
           IN EVIDENZA
         </span>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {articles.map((article, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {allCards.map((article, i) => (
             <Link
               key={i}
               to={`/articolo/${article.slug}`}
-              className="group block overflow-hidden transition-all duration-300 rounded-lg"
+              className="group block overflow-hidden rounded-lg transition-all duration-300"
               style={{
                 backgroundColor: '#FFFFFF',
-                border: '1px solid #E5E5E5',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+                border: '1px solid #D1D5DB',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
               }}
-              ref={(el) => { if (el) cardsRef.current[i] = el as HTMLElement; }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.08)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
                 e.currentTarget.style.transform = 'translateY(-3px)';
                 e.currentTarget.style.borderColor = '#0099CC';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.borderColor = '#E5E5E5';
+                e.currentTarget.style.borderColor = '#D1D5DB';
               }}
             >
               <div className="relative overflow-hidden aspect-video">
                 <img
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-[1.03]"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 <span
-                  className="absolute top-4 left-4 font-heading font-semibold text-xs tracking-[0.08em] uppercase px-3 py-1.5"
+                  className="absolute top-3 left-3 font-heading font-semibold text-[10px] tracking-[0.08em] uppercase px-2 py-1"
                   style={{
                     backgroundColor: 'rgba(0,153,204,0.9)',
                     color: '#FFFFFF',
@@ -112,15 +112,15 @@ export default function FeaturedArticles() {
                   {article.category}
                 </span>
               </div>
-              <div className="p-6">
+              <div className="p-3">
                 <h3
-                  className="font-heading font-medium text-lg leading-snug transition-colors duration-300 group-hover:text-[#0099CC]"
+                  className="font-heading font-medium text-sm leading-snug transition-colors duration-300 group-hover:text-[#0099CC]"
                   style={{ color: '#000000' }}
                 >
                   {article.title}
                 </h3>
                 <p
-                  className="font-heading font-medium text-xs mt-3 tracking-[0.02em]"
+                  className="font-heading font-medium text-[10px] mt-1 tracking-[0.02em]"
                   style={{ color: '#6B7280' }}
                 >
                   {article.date}

@@ -39,7 +39,7 @@ export default function Footer() {
           <div>
             <a href="#" className="inline-block">
               <img
-                src="/logo-footer.jpg"
+                src="./logo-footer.jpg"
                 alt="Poltrona Ufficio e Mobili Ufficio"
                 className="h-16 w-auto object-contain"
               />

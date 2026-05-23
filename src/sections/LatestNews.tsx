@@ -7,29 +7,30 @@ gsap.registerPlugin(ScrollTrigger);
 
 const standardArticles = [
   {
-    slug: 'tendenze-arredo-2026',
-    image: '/news-1.jpg',
-    category: 'ERGONOMIA',
-    title: 'Le tendenze arredo ufficio 2026',
-    excerpt: 'Minimalismo caldo, materiali naturali e tecnologia integrata: cosa aspettarsi quest\'anno.',
+    slug: 'horo-direzionale-anteprima-2026',
+    image:  './horo-1.jpg',
+    category: 'NOVIT\u00C0',
+    title: "HORO: anteprima linea direzionale 2026",
+    excerpt: "Anteprima esclusiva della collezione HORO: design innovativo, eleganza senza tempo per gli uffici direzionali del futuro.",
   },
   {
-    slug: 'postura-corretta-lavoro',
-    image: '/news-4.jpg',
-    category: 'GUIDE',
-    title: 'Postura corretta al lavoro: la guida definitiva',
-    excerpt: 'Esercizi, consigli e prodotti per mantenere una postura sana durante le lunghe giornate in ufficio.',
+    slug: 'kitchen-2026-linea-office',
+    image:  './kitchen-2026.jpg',
+    category: 'NOVIT\u00C0',
+    title: 'Kitchen 2026: la nuova linea Office-Kitchen per aree break',
+    excerpt: 'Scopri Office-Kitchen, la collezione LAS per aree break e spazi conviviali: design contemporaneo e funzionalit\u00E0.',
   },
 ];
 
 const tallArticle = {
-  image: '/news-3.jpg',
-  category: 'NOVIT\u00C0',
-  title: 'Salone del Mobile 2026: le novit\u00E0 per l\'ufficio',
+  slug: 'horo-direzionale-anteprima-2026',
+  image:  './horo-1.jpg',
+  category: "NOVITA'",
+  title: "HORO: la nuova linea direzionale 2026 - Anteprima esclusiva",
 };
 
 const rightArticle = {
-  image: '/news-2.jpg',
+  image:  './news-2.jpg',
   category: 'DESIGN',
   title: 'Coworking e benessere: l\'ufficio del futuro',
   excerpt: 'Spazi flessibili, verde e luce naturale: come cambiano gli ambienti di lavoro.',
