@@ -26,14 +26,6 @@ const novitaArticles = [
     date: '20 Maggio 2026',
     readTime: '6 min',
   },
-  {
-    slug: 'salone-mobile-2026',
-    title: "Salone del Mobile 2026: le novita' per l'ufficio",
-    excerpt: "Le novita' dal Salone del Mobile 2026: cosa cambiera' negli uffici italiani. Sedie auto-regolanti, scrivanie AR e molto altro.",
-    image: './news-3.jpg',
-    date: '20 Gennaio 2026',
-    readTime: '6 min',
-  },
 ];
 
 export default function NovitaPage() {

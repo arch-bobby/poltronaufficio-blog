@@ -147,7 +147,7 @@ export default function LatestNews() {
           <div className="flex flex-col gap-8">
             {/* Tall Featured Card */}
             <Link
-              to="/articolo/salone-mobile-2026"
+              to="/articolo/horo-direzionale-anteprima-2026"
               className="group relative block overflow-hidden rounded-lg transition-all duration-300"
               ref={(el) => { if (el) itemsRef.current[2] = el as HTMLElement; }}
               style={{
