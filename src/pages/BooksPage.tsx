@@ -107,7 +107,7 @@ const books: Book[] = [
     id: 19, title: 'ABSTRACT 2026', subtitle: 'Catalogo Sedute',
     image: './abstract-copertina.jpg', pages: 44, format: 'PDF',
     desc: 'Catalogo completo della collezione Abstract 2026: sedute ergonomiche e innovative per l\'ufficio moderno, con design contemporaneo e materiali sostenibili.',
-    category: 'SEDUTE', downloadUrl: 'https://www.poltronaufficio.it/cataloghi/CATALOGO_Catalogue_%20ABSTRACT_2025.pdf',
+    category: 'SEDUTE', downloadUrl: './CATALOGO_ABSTRACT_2025.pdf',
     baseDownloads: 262,
   },
   {
@@ -121,21 +121,21 @@ const books: Book[] = [
     id: 21, title: 'COLOMBINI SCRIVANIE', subtitle: 'Scrivanie e Tavoli 2025',
     image: './colombini-scrivanie-copertina.jpg', pages: 144, format: 'PDF',
     desc: 'Catalogo completo scrivanie e tavoli C_Office 2025: soluzioni per ufficio operativo e direzionale, con design moderno e funzionale.',
-    category: 'UFFICIO OPERATIVO', downloadUrl: 'https://www.poltronaufficio.it/cataloghi/C_ColombiniOffice-2025-11_Scrivanie+e+tavoli_019U0144.pdf',
+    category: 'UFFICIO OPERATIVO', downloadUrl: './C_ColombiniOffice-Scrivanie.pdf',
     baseDownloads: 56,
   },
   {
     id: 22, title: 'COLOMBINI SCRIVANIE', subtitle: 'Scrivanie e Tavoli 2025',
     image: './colombini-scrivanie-copertina.jpg', pages: 144, format: 'PDF',
     desc: 'Catalogo completo scrivanie e tavoli C_Office 2025: soluzioni per ufficio operativo e direzionale, con design moderno e funzionale.',
-    category: 'UFFICIO DIREZIONALE', downloadUrl: 'https://www.poltronaufficio.it/cataloghi/C_ColombiniOffice-2025-11_Scrivanie+e+tavoli_019U0144.pdf',
+    category: 'UFFICIO DIREZIONALE', downloadUrl: './C_ColombiniOffice-Scrivanie.pdf',
     baseDownloads: 185,
   },
   {
     id: 23, title: 'COLOMBINI OFFICE', subtitle: 'Armadi e Contenitori 2026',
     image: './colombini-office-copertina.jpg', pages: 156, format: 'PDF',
     desc: 'Catalogo completo armadi e contenitori C_Office 2026: soluzioni di archiviazione per l ufficio moderno, con design funzionale e organizzato.',
-    category: 'ARCHIVIO', downloadUrl: 'https://www.poltronaufficio.it/cataloghi/C_ColombiniOffice-2026-01_Armadi+e+contenitori_019U0151.pdf',
+    category: 'ARCHIVIO', downloadUrl: './C_ColombiniOffice-Armadi.pdf',
     baseDownloads: 142,
   },
   {
@@ -184,7 +184,7 @@ const books: Book[] = [
     id: 30, title: 'BOLD 58 direzionale', subtitle: 'Catalogo Ufficio Direzionale',
     image: './bold58-copertina.jpg', pages: 38, format: 'PDF',
     desc: 'Catalogo completo della collezione BOLD 58: soluzioni direzionali per uffici moderni, con design elegante e funzionale per ambienti professionali.',
-    category: 'UFFICIO DIREZIONALE', downloadUrl: 'https://www.poltronaufficio.it/cataloghi/BOLD58_CAT_2022_LD.pdf',
+    category: 'UFFICIO DIREZIONALE', downloadUrl: './BOLD58_CAT_2022_LD.pdf',
     baseDownloads: 188,
   },
   {
