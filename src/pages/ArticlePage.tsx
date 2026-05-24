@@ -393,7 +393,7 @@ const ARTICLES: Record<string, ArticleData> = {
       { type: 'quote', text: 'HORO rappresenta il futuro dell arredo direzionale: design, qualita e innovazione in un unica collezione.' },
     ],
     relatedProducts: [
-      { name: 'Scarica il catalogo HORO preview', price: 'PDF gratuito', image:  './horo-preview-copertina.jpg', link: 'https://www.poltronaufficio.it/cataloghi/HORO_2026_brochure.pdf' },
+      { name: 'Scarica il catalogo HORO preview', price: 'PDF gratuito', image:  './horo-preview-copertina.jpg', link: './HORO_2026_brochure.pdf' },
     ],
     tags: ['HORO', 'Direzionale', 'Anteprima', 'Novita 2026', 'Design'],
   },
